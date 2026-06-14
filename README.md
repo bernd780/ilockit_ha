@@ -70,6 +70,50 @@ The integration has two independent sides:
 > Shelly may still help as an extra advertisement scanner, but it does **not**
 > replace a connectable proxy.
 
+### Setting up a connectable ESP32 proxy
+
+The easiest route is the ready-made **ESPHome Bluetooth Proxy** firmware: flash it
+from your browser at <https://esphome.io/projects/> (choose *Bluetooth Proxy*) and
+adopt it in Home Assistant.
+
+To build it yourself, the key lines are `esp32_ble_tracker` plus `bluetooth_proxy:`
+with **`active: true`** — that flag is what makes the proxy *connectable*:
+
+```yaml
+esphome:
+  name: ilockit-proxy
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf        # recommended for Bluetooth proxies
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+
+logger:
+
+# --- the important part: a *connectable* Bluetooth proxy ---
+esp32_ble_tracker:
+  scan_parameters:
+    active: true
+
+bluetooth_proxy:
+  active: true
+```
+
+Place the ESP32 within radio range of the lock. A **dedicated** ESP32 (ideally one
+with PSRAM) is recommended — adding a Bluetooth proxy to an ESP32 that already runs
+a busy configuration can exhaust its memory.
+
 ## Why your I LOCK IT account is required
 
 The lock has **no open/local API**, and the key needed to talk to it is **not
