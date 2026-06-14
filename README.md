@@ -47,16 +47,52 @@ The integration has two independent sides:
   connectable Home Assistant Bluetooth proxy/adapter, runs the authorize
   handshake and issues the command, then disconnects.
 
-## Requirements
+## Requirements / preconditions
 
-* Home Assistant 2024.1 or newer with the **Bluetooth** integration and at least
-  one *connectable* adapter or [Bluetooth proxy](https://esphome.io/projects/?type=bluetooth)
-  in range of the lock (an ESP32 `bluetooth_proxy` with `active: true`, or a
-  built-in/USB adapter).
-* An **I LOCK IT account** (haveltec). The integration fetches each lock's BLE
-  credentials and cloud device id from your account.
-* The lock should be **awake / on USB power** during BLE actions, and the phone
-  app **not actively connected** at the same moment.
+* **Home Assistant 2024.1 or newer.**
+* An **I LOCK IT (haveltec) account** — see
+  [Why your I LOCK IT account is required](#why-your-i-lock-it-account-is-required).
+* **Cloud entities** (location, source, firmware, colour code, theft protection)
+  need only an internet connection — **no Bluetooth at all**.
+* **BLE entities** (lock/unlock, battery, buttons, switches) need a
+  **_connectable_ Bluetooth proxy or adapter** within radio range of the lock:
+  * an **ESP32 running ESPHome** with `bluetooth_proxy:` and **`active: true`**, or
+  * a **built-in or USB Bluetooth adapter on the Home Assistant host** in range.
+* During BLE actions the lock should be **awake / on USB power**, and the phone
+  app **not connected** at the same moment.
+
+> ⚠️ **A Shelly (or any scanner-only BLE proxy) cannot control the lock.**
+> Shelly Bluetooth proxies only forward *advertisements* — they can **see** the
+> lock but cannot open the GATT connection needed to control it. Lock control
+> therefore requires a **connectable** proxy/adapter (ESP32 ESPHome
+> `bluetooth_proxy: active: true`, or a local adapter). Without one, the BLE
+> entities report *"not in range of a connectable Bluetooth proxy/adapter"*. A
+> Shelly may still help as an extra advertisement scanner, but it does **not**
+> replace a connectable proxy.
+
+## Why your I LOCK IT account is required
+
+The lock has **no open/local API**, and the key needed to talk to it is **not
+fixed on the device** — it is created when the lock is paired in the official
+app. To control the lock over Bluetooth you must prove you are an authorized
+owner using per-lock secrets:
+
+* an **auth id** and **client/phone id** (the authorization slot), and
+* a **long-term key (LTK)** that encrypts the BLE messages.
+
+These secrets are **synchronised to your haveltec account** (the backend is a
+Traccar server). During setup the integration signs in to your account **once**
+to fetch each lock's **auth id, client id and LTK**, plus the **device id** used
+to read its location. From then on they are stored in the Home Assistant config
+entry and used locally — nothing is sent anywhere except your own haveltec
+backend.
+
+The same login also powers the **location** (`device_tracker`) and the cloud
+diagnostic sensors, which read from the haveltec cloud directly.
+
+In short: the e-mail/password are simply your **I LOCK IT app login**, used only
+to retrieve *your own* locks' keys and location — never shared with any third
+party.
 
 ## Installation
 
