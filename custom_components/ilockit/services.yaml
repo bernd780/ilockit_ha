@@ -1,0 +1,30 @@
+enter_pairing_mode:
+  name: Enter pairing mode
+  description: >-
+    Put the lock into pairing/coupling mode so the I LOCK IT app can re-pair it.
+    The lock will drop the Bluetooth connection — that is the expected success
+    signal. Useful to restore the app's control after Home Assistant took it.
+  target:
+    entity:
+      integration: ilockit
+      domain: lock
+
+reset:
+  name: Factory reset
+  description: >-
+    DESTRUCTIVE. Factory-resets the lock, clearing its settings. Only use if you
+    know what you are doing.
+  target:
+    entity:
+      integration: ilockit
+      domain: lock
+
+unpair:
+  name: Unpair this client
+  description: >-
+    DESTRUCTIVE. Removes this client's authorization from the lock. The lock will
+    need to be paired again afterwards.
+  target:
+    entity:
+      integration: ilockit
+      domain: lock

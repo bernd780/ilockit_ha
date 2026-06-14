@@ -1,0 +1,119 @@
+{
+  "config": {
+    "flow_title": "I LOCK IT {name}",
+    "step": {
+      "credentials": {
+        "title": "I LOCK IT account",
+        "description": "Sign in with your I LOCK IT (haveltec) account. The lock's Bluetooth credentials and cloud location device are fetched from the backend.",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      },
+      "select": {
+        "title": "Select lock",
+        "description": "Choose which lock on your account to add.",
+        "data": {
+          "lock": "Lock"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Login failed. Check the email and password.",
+      "no_locks": "No locks were found on this account.",
+      "not_in_range": "This lock is not currently in range of a Bluetooth proxy/adapter. Bring it close to one and try again.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This lock is already configured.",
+      "no_matching_lock": "The discovered lock is not on the signed-in account.",
+      "all_configured": "All locks on this account are already configured."
+    }
+  },
+  "entity": {
+    "lock": {
+      "lock": {
+        "name": "Lock"
+      }
+    },
+    "device_tracker": {
+      "location": {
+        "name": "Location"
+      }
+    },
+    "sensor": {
+      "location_source": {
+        "name": "Location source",
+        "state": {
+          "lock_gps": "Lock GPS (SIM)",
+          "phone": "Phone (app)",
+          "unknown": "Unknown"
+        }
+      },
+      "firmware": {
+        "name": "Firmware"
+      },
+      "color_code": {
+        "name": "Color code"
+      },
+      "battery": {
+        "name": "Battery"
+      }
+    },
+    "binary_sensor": {
+      "theft_mode": {
+        "name": "Theft protection"
+      }
+    },
+    "button": {
+      "refresh": {
+        "name": "Refresh status"
+      },
+      "beep": {
+        "name": "Acoustic signal"
+      },
+      "stop_alarm": {
+        "name": "Stop alarm"
+      }
+    },
+    "switch": {
+      "alarm": {
+        "name": "Alarm"
+      },
+      "do_not_disturb": {
+        "name": "Do not disturb"
+      },
+      "auto_open_close": {
+        "name": "Automatic open/close"
+      },
+      "sound_closing": {
+        "name": "Closing sound"
+      },
+      "sound_opening": {
+        "name": "Opening sound"
+      },
+      "sound_warning": {
+        "name": "Warning sound"
+      }
+    },
+    "select": {
+      "alarm_sensitivity": {
+        "name": "Alarm sensitivity"
+      }
+    }
+  },
+  "services": {
+    "enter_pairing_mode": {
+      "name": "Enter pairing mode",
+      "description": "Put the lock into pairing/coupling mode so the app can re-pair it. The lock drops the connection (expected)."
+    },
+    "reset": {
+      "name": "Factory reset",
+      "description": "DESTRUCTIVE. Factory-resets the lock, clearing its settings."
+    },
+    "unpair": {
+      "name": "Unpair this client",
+      "description": "DESTRUCTIVE. Removes this client's authorization; the lock must be paired again."
+    }
+  }
+}

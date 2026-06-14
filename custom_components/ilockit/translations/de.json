@@ -1,0 +1,119 @@
+{
+  "config": {
+    "flow_title": "I LOCK IT {name}",
+    "step": {
+      "credentials": {
+        "title": "I LOCK IT Konto",
+        "description": "Mit dem I LOCK IT (haveltec) Konto anmelden. Die Bluetooth-Zugangsdaten des Schlosses und das Standortgerät der Cloud werden vom Backend geladen.",
+        "data": {
+          "email": "E-Mail",
+          "password": "Passwort"
+        }
+      },
+      "select": {
+        "title": "Schloss auswählen",
+        "description": "Wähle, welches Schloss deines Kontos hinzugefügt werden soll.",
+        "data": {
+          "lock": "Schloss"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Anmeldung fehlgeschlagen. E-Mail und Passwort prüfen.",
+      "no_locks": "Auf diesem Konto wurden keine Schlösser gefunden.",
+      "not_in_range": "Dieses Schloss ist derzeit nicht in Reichweite eines Bluetooth-Proxys/Adapters. Bring es in die Nähe und versuche es erneut.",
+      "unknown": "Unerwarteter Fehler."
+    },
+    "abort": {
+      "already_configured": "Dieses Schloss ist bereits eingerichtet.",
+      "no_matching_lock": "Das erkannte Schloss gehört nicht zum angemeldeten Konto.",
+      "all_configured": "Alle Schlösser dieses Kontos sind bereits eingerichtet."
+    }
+  },
+  "entity": {
+    "lock": {
+      "lock": {
+        "name": "Schloss"
+      }
+    },
+    "device_tracker": {
+      "location": {
+        "name": "Standort"
+      }
+    },
+    "sensor": {
+      "location_source": {
+        "name": "Standortquelle",
+        "state": {
+          "lock_gps": "Schloss-GPS (SIM)",
+          "phone": "Telefon (App)",
+          "unknown": "Unbekannt"
+        }
+      },
+      "firmware": {
+        "name": "Firmware"
+      },
+      "color_code": {
+        "name": "Farbcode"
+      },
+      "battery": {
+        "name": "Batterie"
+      }
+    },
+    "binary_sensor": {
+      "theft_mode": {
+        "name": "Diebstahlschutz"
+      }
+    },
+    "button": {
+      "refresh": {
+        "name": "Status aktualisieren"
+      },
+      "beep": {
+        "name": "Signalton"
+      },
+      "stop_alarm": {
+        "name": "Alarm stoppen"
+      }
+    },
+    "switch": {
+      "alarm": {
+        "name": "Alarm"
+      },
+      "do_not_disturb": {
+        "name": "Nicht stören"
+      },
+      "auto_open_close": {
+        "name": "Automatisches Auf/Zu"
+      },
+      "sound_closing": {
+        "name": "Schließ-Ton"
+      },
+      "sound_opening": {
+        "name": "Öffnungs-Ton"
+      },
+      "sound_warning": {
+        "name": "Warn-Ton"
+      }
+    },
+    "select": {
+      "alarm_sensitivity": {
+        "name": "Alarm-Empfindlichkeit"
+      }
+    }
+  },
+  "services": {
+    "enter_pairing_mode": {
+      "name": "Koppelmodus aktivieren",
+      "description": "Versetzt das Schloss in den Koppelmodus, damit die App es neu koppeln kann. Das Schloss trennt die Verbindung (erwartet)."
+    },
+    "reset": {
+      "name": "Zurücksetzen",
+      "description": "DESTRUKTIV. Setzt das Schloss auf Werkseinstellungen zurück."
+    },
+    "unpair": {
+      "name": "Kopplung entfernen",
+      "description": "DESTRUKTIV. Entfernt die Autorisierung dieses Clients; das Schloss muss neu gekoppelt werden."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "domain": "ilockit",
+  "name": "I LOCK IT Smart Bike Lock",
+  "version": "0.1.0",
+  "documentation": "https://github.com/bernd780/ilockit_ha",
+  "issue_tracker": "https://github.com/bernd780/ilockit_ha/issues",
+  "dependencies": ["bluetooth_adapters"],
+  "codeowners": ["@bernd780"],
+  "config_flow": true,
+  "iot_class": "local_push",
+  "requirements": ["bleak-retry-connector>=3.5.0"],
+  "bluetooth": [
+    { "local_name": "ILOCKIT-*" },
+    { "service_uuid": "0000f00f-1212-efde-1523-785fef13d123" },
+    { "service_uuid": "0000f00d-1212-efde-1523-785fef13d123" }
+  ]
+}
